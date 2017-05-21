@@ -277,7 +277,7 @@ class Client(object):
         >>> client._parse_code('010501')
         ('01', '05', '010501')
         """
-        if code not in NETWORK.keys():
+        if code not in list(NETWORK.keys()):
             msg = "{}: Incorrect network code.".format(code)
             raise ValueError(msg)
         elif code.startswith('0105') or code.startswith('0302'):
@@ -483,7 +483,7 @@ class Client(object):
                 isinstance(startdate, date)):
             startdate = _string2datetime(startdate)
 
-        if int(span) not in range(1, 8):
+        if int(span) not in list(range(1, 8)):
             raise ValueError("span is not digit or not in [1, 7].")
 
         params = {
@@ -584,7 +584,7 @@ class Client(object):
             station = items[2]
             latitude, longtitude = items[7], items[8]
             if not code or network == code:
-                print(network, station, longtitude, latitude)
+                print((network, station, longtitude, latitude))
 
     def _get_allowed_span(self, code):
         """Get allowed max span for each network.
@@ -772,7 +772,7 @@ class Client(object):
             print(info)
         else:
             for code in sorted(NETWORK.keys()):
-                print("{:7s}: {}".format(code, NETWORK[code].name))
+                print(("{:7s}: {}".format(code, NETWORK[code].name)))
 
     def _get_win32tools(self):
         """Download win32 tools."""
